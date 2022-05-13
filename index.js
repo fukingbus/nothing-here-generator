@@ -25,8 +25,10 @@ window.onload = ()=>{
 
 function onGenerateClick(){
     let context = canvas.getContext('2d')
-    if(isIOS)
+    if(isIOS){
+        context.scale(2,2)
         context.font = '36px "-apple-system"'
+    }
     else
         context.font = '36px "Noto Sans TC"'
 
