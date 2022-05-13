@@ -1,6 +1,7 @@
 var canvas
 
 const PRESET_TEXT_WRAP_LINEHEIGHT = 36
+var isIOS = false
 
 window.onload = ()=>{
     document.getElementById('generate-bt').addEventListener('click',onGenerateClick)
@@ -9,11 +10,25 @@ window.onload = ()=>{
     canvas = document.getElementById('canvas-preview')
     canvas.width = 720
     canvas.height = 813
+
+    isIOS = [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
 function onGenerateClick(){
     let context = canvas.getContext('2d')
-    context.font = '36px "Noto Sans TC"'
+    if(isIOS)
+        context.font = '36px "-apple-system"'
+    else
+        context.font = '36px "Noto Sans TC"'
 
     let row1Text = document.getElementById("trashtalk-row1-input").value
     let row2Text = document.getElementById("trashtalk-row2-input").value
